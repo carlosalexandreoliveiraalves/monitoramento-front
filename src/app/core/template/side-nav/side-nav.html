@@ -1,1 +1,32 @@
-<p>side-nav works!</p>
+<aside class="flex flex-col items-start h-screen w-full">
+  <header class="flex basis-1/9 items-center w-full mb-12 w-full min-w-70">
+    <img class="w-20 h-20" src="assets\landing-page\water-logo.png" alt="minha logo de gota" />
+    <h1>AquaTech</h1>
+  </header>
+
+  <div class="side-nav-body basis-7/9 flex flex-col items-start pl-10 w-full gap-10">
+    <a routerLink="/home" class="flex items-center gap-2">
+      <span class="material-symbols-outlined"> dashboard </span> Dashboard
+    </a>
+    <a routerLink="user" class="flex items-center gap-2">
+      <span class="material-symbols-outlined"> user_attributes </span> Usuários
+    </a>
+    <a routerLink="device" class="flex items-center gap-2">
+      <span class="material-symbols-outlined"> devices </span> Aparelhos
+    </a>
+    <a routerLink="property" class="flex items-center gap-2">
+      <span class="material-symbols-outlined"> file_map </span> Propriedades
+    </a>
+    <a routerLink="sensor" class="flex items-center gap-2">
+      <span class="material-symbols-outlined"> motion_sensor_active </span> Sensores
+    </a>
+  </div>
+
+  <footer class="flex basis-1/9 w-full h-full justify-center items-center">
+    <div class="flex items-center gap-2">
+      <button class="flex items-center gap-2">
+        <span class="material-symbols-outlined"> logout </span>logout
+      </button>
+    </div>
+  </footer>
+</aside>

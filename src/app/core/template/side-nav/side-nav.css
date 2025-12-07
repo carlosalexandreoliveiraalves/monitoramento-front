@@ -1,0 +1,56 @@
+aside {
+  background-color: rgba(255, 255, 255, 0.452);
+  backdrop-filter: blur(5px);
+  font-family: 'MuseoModerno', serif;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
+}
+
+header {
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 1px 2px;
+}
+
+header > h1 {
+  font-size: 1.8em;
+}
+
+.side-nav-body {
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.side-nav-body::-webkit-scrollbar {
+  display: none;
+}
+.side-nav-body > a {
+  font-size: 1.5em;
+  color: var(--text);
+}
+
+.side-nav-body > a:hover {
+  transition: 0.2s;
+  color: var(--primary);
+}
+
+footer > div > button {
+  font-size: 1.5em;
+}
+
+footer > div {
+  border-radius: 10px;
+  padding: 10px 50px 10px 50px;
+}
+
+footer > div:hover {
+  transition: 0.2s;
+  background: var(--danger);
+}
+
+footer > div > button:hover {
+  transition: 0.2s;
+  color: white;
+}
+
+button {
+  cursor: pointer;
+}
