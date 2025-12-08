@@ -1,31 +1,65 @@
-<aside class="flex flex-col items-start h-screen w-full">
-  <header class="flex basis-1/9 items-center w-full mb-12 w-full min-w-70">
-    <img class="w-20 h-20" src="assets\landing-page\water-logo.png" alt="minha logo de gota" />
-    <h1>AquaTech</h1>
+<aside class="flex flex-col items-start h-full w-full">
+  <header
+    class="flex basis-1/9 items-center w-full mb-12 transition-all"
+    [class]="sideNavService.sideNavOpen() ? 'justify-start pl-6 gap-4' : 'justify-center'"
+  >
+    <img class="w-20 h-20 object-contain" src="assets/landing-page/water-logo.png" alt="logo" />
+
+    @if (sideNavService.sideNavOpen()) {
+    <h1 class="text-xl whitespace-nowrap overflow-hidden">AquaTech</h1>
+    }
   </header>
 
-  <div class="side-nav-body basis-7/9 flex flex-col items-start pl-10 w-full gap-10">
-    <a routerLink="/home" class="flex items-center gap-2">
-      <span class="material-symbols-outlined"> dashboard </span> Dashboard
+  <div
+    class="side-nav-body basis-7/9 flex flex-col w-full gap-8 transition-all"
+    [class]="sideNavService.sideNavOpen() ? 'items-start pl-10' : 'items-center pl-0'"
+  >
+    <a routerLink="/home" class="flex items-center gap-2 hover:text-blue-500 transition-colors">
+      <span class="material-symbols-outlined text-2xl"> dashboard </span>
+      @if (sideNavService.sideNavOpen()) {
+      <span class="fade-in">Dashboard</span>
+      }
     </a>
-    <a routerLink="user" class="flex items-center gap-2">
-      <span class="material-symbols-outlined"> user_attributes </span> Usuários
+
+    <a routerLink="user" class="flex items-center gap-2 hover:text-blue-500 transition-colors">
+      <span class="material-symbols-outlined text-2xl"> user_attributes </span>
+      @if (sideNavService.sideNavOpen()) {
+      <span class="fade-in">Usuários</span>
+      }
     </a>
-    <a routerLink="device" class="flex items-center gap-2">
-      <span class="material-symbols-outlined"> devices </span> Aparelhos
+
+    <a routerLink="device" class="flex items-center gap-2 hover:text-blue-500 transition-colors">
+      <span class="material-symbols-outlined text-2xl"> devices </span>
+      @if (sideNavService.sideNavOpen()) {
+      <span class="fade-in">Aparelhos</span>
+      }
     </a>
-    <a routerLink="property" class="flex items-center gap-2">
-      <span class="material-symbols-outlined"> file_map </span> Propriedades
+
+    <a routerLink="property" class="flex items-center gap-2 hover:text-blue-500 transition-colors">
+      <span class="material-symbols-outlined text-2xl"> file_map </span>
+      @if (sideNavService.sideNavOpen()) {
+      <span class="fade-in">Propriedades</span>
+      }
     </a>
-    <a routerLink="sensor" class="flex items-center gap-2">
-      <span class="material-symbols-outlined"> motion_sensor_active </span> Sensores
+
+    <a routerLink="sensor" class="flex items-center gap-2 hover:text-blue-500 transition-colors">
+      <span class="material-symbols-outlined text-2xl"> motion_sensor_active </span>
+      @if (sideNavService.sideNavOpen()) {
+      <span class="fade-in">Sensores</span>
+      }
     </a>
   </div>
 
   <footer class="flex basis-1/9 w-full h-full justify-center items-center">
     <div class="flex items-center gap-2">
-      <button class="flex items-center gap-2" routerLink="">
-        <span class="material-symbols-outlined"> logout </span>logout
+      <button
+        class="flex items-center gap-2 hover:text-red-700 transition-colors"
+        routerLink=""
+      >
+        <span class="material-symbols-outlined text-2xl"> logout </span>
+        @if (sideNavService.sideNavOpen()) {
+        <span class="fade-in">logout</span>
+        }
       </button>
     </div>
   </footer>

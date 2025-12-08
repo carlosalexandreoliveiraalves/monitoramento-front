@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from "@angular/router";
+import { SideNavService } from '../services/draw/side-nav';
 
 @Component({
   selector: 'app-side-nav',
@@ -8,5 +9,7 @@ import { RouterLink } from "@angular/router";
   styleUrl: './side-nav.css',
 })
 export class SideNav {
+  protected sideNavService = inject(SideNavService);
 
+  
 }

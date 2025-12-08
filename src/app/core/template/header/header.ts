@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { SideNavService } from './../services/draw/side-nav';
+import { Component, inject } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrl: './header.css',
 })
 export class Header {
+  private sideNavService = inject(SideNavService);
+
+  toggleSideNav() {
+    this.sideNavService.toogleSideNav();
+  }
+
 
 }

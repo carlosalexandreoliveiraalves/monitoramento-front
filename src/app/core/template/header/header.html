@@ -1,15 +1,23 @@
-<header class="flex flex-row items-center justify-end bg-blue w-full h-full">
-  <div class="basis-1/1 flex flex-row items-center justify-end pr-20 gap-6">
-    <div class="flex flex-row items-center">
-      <a class="icon-button flex flex-row items-center gap-2 p-2">
-        <span class="material-symbols-outlined"> notifications </span>
-      </a>
+<header class="flex flex-row items-center bg-blue w-full h-full">
+  <div class="basis-1/1 flex flex-row items-center justify-between">
+    <div class="hamburguer flex items-center justify-center pl-7">
+      <button (click)="toggleSideNav()">
+        <span class="material-symbols-outlined"> menu </span>
+      </button>
     </div>
 
-    <div class="flex flex-row items-center">
-      <a class="flex flex-row items-center gap-2">
-        <span class="material-symbols-outlined"> account_circle </span> Profile</a
-      >
+    <div class="flex flow-row items-center justify-end pr-20 gap-6">
+      <div class="flex flex-row items-center">
+        <a class="icon-button flex flex-row items-center gap-2 p-2">
+          <span class="material-symbols-outlined"> notifications </span>
+        </a>
+      </div>
+
+      <div class="flex flex-row items-center">
+        <a class="flex flex-row items-center gap-2">
+          <span class="material-symbols-outlined"> account_circle </span> Profile</a
+        >
+      </div>
     </div>
   </div>
 </header>
