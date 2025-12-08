@@ -1,0 +1,30 @@
+article {
+  font-family: 'MuseoModerno', serif;
+}
+
+/* Hedaer dos cards */
+.card {
+  border-radius: 20px;
+  height: auto;
+  padding: 2vh;
+  background-color: rgba(255, 255, 255, 0.452);
+  backdrop-filter: blur(5px);
+  gap: 2vh;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.card > .header > p {
+  font-size: 1.3em;
+}
+
+.card > .body > p {
+  font-size: 2.4em;
+}
+
+/* Dados das últimas 24 horas */
+
+.last-24 {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  border-radius: 20px;
+  width: calc(98%); /* sou foda, nem a IA pensou em aplicar essa propriedae para resolver o problema de zoom e ampliação*/
+}

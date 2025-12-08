@@ -1,7 +1,8 @@
 <div class="main flex flex-row">
-  <app-side-nav class="basis-2/11 mr-20"> </app-side-nav>
+  <app-side-nav class="basis-2/11"> </app-side-nav>
 
-  <div class="basis-9/11 pt-20">
-    <router-outlet> </router-outlet>
+  <div class="basis-9/11 flex flex-col">
+    <div class="basis-1/9"><app-header> </app-header></div>
+    <div class="basis-8/9 pl-10 pt-10 pr-10"><router-outlet> </router-outlet></div>
   </div>
 </div>
