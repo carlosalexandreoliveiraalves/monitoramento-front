@@ -51,7 +51,7 @@ export class ChartLastHours implements OnInit {
   public lineChartOptions: ChartOptions<'line'> = {
     responsive: true,
     maintainAspectRatio: false, // IMPORTANTE para o Tailwind controlar a altura
-    resizeDelay: 100,
+    
     animation: {
       duration: 1000, // duração em ms
       easing: 'easeOutQuart'

@@ -13,7 +13,9 @@ header {
   backdrop-filter: blur(5px);
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 }
-
+a {
+  cursor: pointer;
+}
 a:hover {
   transition: 0.2s;
   color: var(--primary);

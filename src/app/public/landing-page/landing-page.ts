@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from "@angular/router";
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Component({
   selector: 'app-landing-page',
@@ -9,4 +10,9 @@ import { RouterLink } from "@angular/router";
 })
 export class LandingPage {
 
+  private readonly oidcSecurityService = inject(OidcSecurityService);
+
+  login(): void {
+    this.oidcSecurityService.authorize();
+  }
 }

@@ -12,7 +12,7 @@ export class Header {
 
   toggleSideNav() {
     this.sideNavService.toogleSideNav();
-  }
+  };
 
 
 }

@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { RouterOutlet, Router } from '@angular/router';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,26 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
+export class App implements OnInit {
   protected readonly title = signal('front-monitoramento-agua');
+
+  private readonly oidcSecurityService = inject(OidcSecurityService);
+  private readonly router = inject(Router);
+
+  userData$ = this.oidcSecurityService.userData$;
+  isAuthenticated = false;
+
+  ngOnInit(): void {
+    this.oidcSecurityService.checkAuth().subscribe(({ isAuthenticated, userData, accessToken }) => {
+
+      console.log('App iniciou. Está autenticado?', isAuthenticated);
+      console.log('Dados do usuário:', userData);
+
+      this.isAuthenticated = isAuthenticated;
+
+      if (isAuthenticated) {
+        this.router.navigate(['/home']);
+      }
+    });
+  }
 }
