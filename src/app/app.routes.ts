@@ -8,6 +8,11 @@ import { Routes } from '@angular/router';
 import { NotFound } from './public/not-found/not-found';
 import { Dashboard } from './modules/dashboard/dashboard/dashboard';
 import { authGuard } from './core/guards/auth-guard';
+import { PersonList } from './modules/user/components/person-list/person-list';
+import { PersonForm } from './modules/user/components/person-form/person-form';
+import { PropertyList } from './modules/property/components/property-list/property-list';
+import { DeviceList } from './modules/device/components/device-list/device-list';
+import { SensorList } from './modules/sensor/components/sensor-list/sensor-list';
 
 export const routes: Routes = [
     {
@@ -24,20 +29,32 @@ export const routes: Routes = [
                 component: Dashboard
             },
             {
-                path: 'user',
-                component: User
+                path: 'person',
+                component: User,
+                children: [
+                    { path: '', component: PersonList },     // Lista
+                ]
             },
             {
                 path: 'device',
-                component: Device
+                component: Device,
+                children: [
+                    { path: '', component: DeviceList },     // Lista
+                ]
             },
             {
                 path: 'property',
-                component: Property
+                component: Property,
+                children: [
+                    { path: '', component: PropertyList },     // Lista
+                ]
             },
             {
                 path: 'sensor',
-                component: Sensor
+                component: Sensor,
+                children: [
+                    { path: '', component: SensorList },     // Lista
+                ]
             }
         ]
     },

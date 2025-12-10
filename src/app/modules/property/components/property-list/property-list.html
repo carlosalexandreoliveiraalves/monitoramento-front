@@ -1,0 +1,119 @@
+<article class="flex flex-col p-6 gap-6 h-full">
+  <header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+    <div>
+      <h1 class="text-2xl font-bold text-primary flex items-center gap-2">
+        <span class="material-symbols-outlined text-3xl">domain</span>
+        Propriedades
+      </h1>
+      <p class="text-gray-500 text-sm mt-1">Gerencie as áreas e endereços monitorados.</p>
+    </div>
+    <button
+      (click)="openNew()"
+      class="btn-primary flex items-center gap-2 px-5 py-2.5 rounded-xl shadow-md text-black bg-primary hover:shadow-lg transition-all active:scale-95"
+    >
+      <span class="material-symbols-outlined text-xl">add</span> Novo Local
+    </button>
+  </header>
+
+  <div
+    class="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col flex-1 relative min-h-[300px]"
+  >
+    <ng-container *ngIf="data$ | async as pageData; else loading">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead class="bg-gray-50 border-b border-gray-100">
+            <tr>
+              <th class="p-4 text-xs font-bold text-gray-500 uppercase">Área (ha)</th>
+              <th class="p-4 text-xs font-bold text-gray-500 uppercase">Endereço</th>
+              <th class="p-4 text-xs font-bold text-gray-500 uppercase">Proprietário</th>
+              <th class="p-4 text-xs font-bold text-gray-500 uppercase text-right">Ações</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr
+              *ngFor="let prop of pageData.content"
+              class="hover:bg-gray-50 transition-colors group"
+            >
+              <td class="p-4 font-semibold text-gray-700">{{ prop.areaHa }} ha</td>
+              <td class="p-4 text-gray-600">{{ prop.address }}</td>
+              <td class="p-4">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-gray-400 text-sm">person</span>
+                  <span class="text-sm text-gray-700">{{
+                    prop.person?.name || 'Não atribuído'
+                  }}</span>
+                </div>
+              </td>
+              <td class="p-4 text-right">
+                <div class="flex items-center justify-end gap-2">
+                  <button (click)="openEdit(prop.id)" class="text-gray-400 hover:text-primary">
+                    <span class="material-symbols-outlined">edit</span>
+                  </button>
+                  <button (click)="onDelete(prop.id)" class="text-gray-400 hover:text-danger">
+                    <span class="material-symbols-outlined">delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="pageData.content.length === 0">
+              <td colspan="4" class="p-10 text-center text-gray-500">
+                Nenhuma propriedade encontrada.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="p-4 border-t border-gray-100 flex items-center justify-between bg-white mt-auto">
+        <span class="text-sm text-gray-500"
+          >Total: <span class="font-bold">{{ totalElements }}</span></span
+        >
+        <div class="flex gap-2">
+          <button
+            (click)="prevPage()"
+            [disabled]="currentPage === 0"
+            class="px-3 py-1 rounded-lg border border-gray-200 text-gray-500"
+          >
+            Ant
+          </button>
+          <span class="flex items-center px-2 text-sm"
+            >{{ currentPage + 1 }} / {{ totalPages || 1 }}</span
+          >
+          <button
+            (click)="nextPage()"
+            [disabled]="currentPage >= totalPages - 1"
+            class="px-3 py-1 rounded-lg border border-gray-200 text-gray-500"
+          >
+            Prox
+          </button>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #loading>
+      <div
+        class="flex-1 flex flex-col items-center justify-center min-h-[300px] text-gray-400 gap-3"
+      >
+        <span class="material-symbols-outlined text-5xl animate-spin text-primary/60"
+          >progress_activity</span
+        >
+        <p class="text-sm font-medium">Carregando propriedades...</p>
+      </div>
+    </ng-template>
+  </div>
+
+  <div
+    *ngIf="isModalOpen"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
+  >
+    <div
+      class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 relative animate-fade-in-up border border-gray-100"
+    >
+      <app-property-form
+        [propertyId]="selectedId"
+        (close)="closeModal()"
+        (saved)="onFormSaved()"
+      ></app-property-form>
+    </div>
+  </div>
+</article>

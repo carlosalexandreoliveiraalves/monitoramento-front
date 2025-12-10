@@ -1,0 +1,91 @@
+<div class="flex flex-col h-full relative">
+  
+  <div class="flex items-center justify-between mb-6 text-primary">
+    <h2 class="text-2xl font-bold flex items-center gap-2">
+      <span class="material-symbols-outlined">{{ deviceId ? 'edit' : 'add_circle' }}</span>
+      {{ deviceId ? 'Editar' : 'Novo' }} Dispositivo
+    </h2>
+    <button (click)="onCancel()" class="text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-full hover:bg-gray-100">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+  </div>
+
+  <div *ngIf="isLoading" class="absolute inset-0 bg-white/70 z-10 flex items-center justify-center">
+    <span class="material-symbols-outlined animate-spin text-3xl text-primary">progress_activity</span>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-5">
+    
+    <div class="flex flex-col gap-1">
+      <label class="font-semibold text-gray-600 text-sm">Nome do Dispositivo</label>
+      <div class="relative">
+        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg">router</span>
+        <input 
+          type="text" 
+          formControlName="name" 
+          class="pl-10 input-dashboard"
+          placeholder="Ex: Sensor Poço Artesiano"
+          [ngClass]="{'border-red-300 focus:ring-red-200': form.get('name')?.invalid && form.get('name')?.touched}"
+        >
+      </div>
+      <span *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="text-red-500 text-xs mt-1">Nome obrigatório.</span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex flex-col gap-1">
+          <label class="font-semibold text-gray-600 text-sm">Status Operacional</label>
+          <div class="relative">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg">toggle_on</span>
+            <select formControlName="status" class="pl-10 input-dashboard bg-white appearance-none cursor-pointer">
+              <option value="Active">Ativo</option>
+              <option value="Inactive">Inativo</option>
+              <option value="Maintenance">Manutenção</option>
+            </select>
+            <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">expand_more</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label class="font-semibold text-gray-600 text-sm">Vincular à Propriedade</label>
+          <div class="relative">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg">domain</span>
+            <select 
+              formControlName="propertyId" 
+              class="pl-10 input-dashboard bg-white appearance-none cursor-pointer"
+              [ngClass]="{'border-red-300 focus:ring-red-200': form.get('propertyId')?.invalid && form.get('propertyId')?.touched}">
+              <option [ngValue]="null" disabled>Selecione...</option>
+              <option *ngFor="let prop of propertiesList" [value]="prop.id">{{ prop.address }}</option>
+            </select>
+            <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">expand_more</span>
+          </div>
+          <span *ngIf="form.get('propertyId')?.invalid && form.get('propertyId')?.touched" class="text-red-500 text-xs mt-1">Propriedade obrigatória.</span>
+        </div>
+    </div>
+
+    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+        <h3 class="text-sm font-bold text-gray-500 mb-3 uppercase tracking-wider">Valores de Referência</h3>
+        <div class="grid grid-cols-3 gap-3">
+            <div class="flex flex-col gap-1">
+                <label class="text-xs font-semibold text-gray-500">Temp. (°C)</label>
+                <input type="text" formControlName="temperature" class="input-dashboard text-center" placeholder="--">
+            </div>
+            <div class="flex flex-col gap-1">
+                <label class="text-xs font-semibold text-gray-500">pH</label>
+                <input type="text" formControlName="phProbe" class="input-dashboard text-center" placeholder="--">
+            </div>
+            <div class="flex flex-col gap-1">
+                <label class="text-xs font-semibold text-gray-500">Turbidez</label>
+                <input type="text" formControlName="turbidity" class="input-dashboard text-center" placeholder="--">
+            </div>
+        </div>
+    </div>
+
+    <div class="flex gap-3 mt-2 pt-4 border-t border-gray-100">
+      <button type="button" (click)="onCancel()" class="w-1/3 py-3 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-50 transition-colors font-medium">Cancelar</button>
+      <button type="submit" [disabled]="form.invalid || isLoading" class="w-2/3 py-3 rounded-lg bg-purple-600 text-white shadow hover:bg-purple-700 hover:shadow-lg disabled:opacity-50 transition-all active:scale-95 font-medium flex justify-center items-center gap-2">
+        <span *ngIf="!isLoading">Salvar Dispositivo</span>
+        <span *ngIf="isLoading" class="material-symbols-outlined animate-spin text-sm">progress_activity</span>
+      </button>
+    </div>
+  </form>
+</div>
