@@ -18,16 +18,17 @@ export class App implements OnInit {
   isAuthenticated = false;
 
   ngOnInit(): void {
-    this.oidcSecurityService.checkAuth().subscribe(({ isAuthenticated, userData, accessToken }) => {
+    this.oidcSecurityService.checkAuth().subscribe(({ isAuthenticated, userData, accessToken, idToken }) => {
 
-      console.log('App iniciou. Está autenticado?', isAuthenticated);
+      console.log('=== VERIFICAÇÃO DE AUTENTICAÇÃO ===');
+      console.log('Está autenticado?', isAuthenticated);
       console.log('Dados do usuário:', userData);
+      console.log('Access Token:', accessToken);
+      console.log('ID Token:', idToken);
 
       this.isAuthenticated = isAuthenticated;
 
-      if (isAuthenticated) {
-        this.router.navigate(['/home']);
-      }
+
     });
   }
 }

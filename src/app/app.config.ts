@@ -5,11 +5,13 @@ import { routes } from './app.routes';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { authConfig } from './auth/auth.config';
 import { provideAuth } from 'angular-auth-oidc-client';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './core/interceptors/auth-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes), provideCharts(withDefaultRegisterables()), provideAuth(authConfig)
-
+    provideRouter(routes), provideCharts(withDefaultRegisterables()),
+    provideAuth(authConfig), provideHttpClient(withInterceptors([authInterceptor]))
   ]
 };

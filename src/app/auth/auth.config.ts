@@ -3,16 +3,15 @@ import { PassedInitialConfig } from 'angular-auth-oidc-client';
 export const authConfig: PassedInitialConfig = {
   config: {
     authority: 'https://cognito-idp.us-east-2.amazonaws.com/us-east-2_hPTvLua8W',
-    // authWellknownEndpoints: {
-    //   endSessionEndpoint: 'https://us-east-2hptvlua8w.auth.us-east-2.amazoncognito.com/logout'
-    // },
-    redirectUrl: window.location.origin,
-    // postLogoutRedirectUri: window.location.origin,
+    redirectUrl: 'http://localhost:4200/home',
+    postLogoutRedirectUri: 'http://localhost:4200',
     clientId: '4tnlsfrldrl6mg67fualvd123d',
-    scope: 'openid profile email offline_access', // 'openid profile offline_access ' + your scopes
+    scope: 'openid email phone',
     responseType: 'code',
     silentRenew: true,
     useRefreshToken: true,
     renewTimeBeforeTokenExpiresInSeconds: 30,
+    autoUserInfo: false,
+    silentRenewUrl: 'http://localhost:4200/silent-renew.html',
   }
 }

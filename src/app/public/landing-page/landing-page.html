@@ -17,9 +17,17 @@
 
       <div class="flex basis-1/4 items-center justify-end pr-20">
         <div class="flex items-center gap-2">
-          <button (click)="login()" class="flex items-center gap-2">
-            <span class="material-symbols-outlined"> arrow_forward </span>Login
+          @if (authService.isLogged()) {
+          <button routerLink="/home" class="flex items-center gap-2 btn-primary">
+            <span class="material-symbols-outlined"> jamboard_kiosk </span>
+            Acessar Painel
           </button>
+          } @else {
+          <button (click)="login()" class="flex items-center gap-2">
+            <span class="material-symbols-outlined"> arrow_forward </span>
+            Login
+          </button>
+          }
         </div>
       </div>
     </header>

@@ -1,43 +1,44 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { signIn, signOut, fetchAuthSession, getCurrentUser } from 'aws-amplify/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  
+  private readonly STORAGE_KEY = '0-4tnlsfrldrl6mg67fualvd123d';
 
-  async login(username: string, password: string) {
-    try {
-      const { isSignedIn, nextStep } = await signIn({ username, password });
-      console.log('Login realizado:', isSignedIn);
-      return isSignedIn;
-    } catch (error) {
-      console.error('Erro no login:', error);
-      throw error;
-    }
-  }
+  private router = inject(Router);
 
-  async getCurrentToken() {
+  public isLogged = signal<boolean>(false);
+
+
+  getAccessToken(): string | null {
+    const storedData = sessionStorage.getItem(this.STORAGE_KEY);
+
+    if (!storedData) return null;
+
     try {
-      const { tokens } = await fetchAuthSession();
-      
-      // Retorna o ID Token (geralmente usado para autenticação)
-      return tokens?.idToken?.toString();
-      
-      // Se precisar do Access Token, use: tokens?.accessToken?.toString();
-    } catch (err) {
-      console.log(err);
+      const parsedData = JSON.parse(storedData);
+      // Navega no JSON: root -> authnResult -> access_token
+      return parsedData?.authnResult?.access_token || null;
+    } catch (e) {
+      console.error('Erro ao fazer parse do token Cognito', e);
       return null;
     }
   }
 
-  
-  async logout() {
-    try {
-      await signOut();
-    } catch (error) {
-      console.error('Erro ao sair', error);
-    }
+
+  isAuthenticated(): boolean {
+    const token = this.getAccessToken();
+    this.isLogged.set(true);
+    return !!token;
+  }
+
+  logout(): void {
+    sessionStorage.removeItem(this.STORAGE_KEY);
+    sessionStorage.clear();
+    this.isLogged.set(false);
+    this.router.navigate(['/']);
   }
 }

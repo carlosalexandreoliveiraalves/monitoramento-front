@@ -7,6 +7,7 @@ import { LandingPage } from './public/landing-page/landing-page';
 import { Routes } from '@angular/router';
 import { NotFound } from './public/not-found/not-found';
 import { Dashboard } from './modules/dashboard/dashboard/dashboard';
+import { authGuard } from './core/guards/auth-guard';
 
 export const routes: Routes = [
     {
@@ -16,6 +17,7 @@ export const routes: Routes = [
     {
         path: 'home',
         component: Home,
+        canActivate: [authGuard],
         children: [
             {
                 path: '',

@@ -1,0 +1,50 @@
+:root {
+  --primary: #87609F;   
+  --secondary: #9F8760; 
+  --terciary: #609F87;   
+  --text: #333333;
+  --background: #f4f4f4;
+  --danger: #bb2124;
+}
+
+.background {
+  background-color: var(--background);
+}
+
+.text-primary {
+  color: var(--primary);
+}
+
+.text-terciary {
+  color: var(--terciary);
+}
+
+.text-text {
+  color: var(--text);
+}
+
+/* Estilização do Botão para combinar com sua Landing Page */
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+  padding: 0.75rem 2rem; /* Um pouco mais largo para destaque */
+  border-radius: 9999px; /* Arredondado completo (pill shape) */
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+
+  &:hover {
+    background-color: darken(#87609F, 10%); /* Escurece um pouco a cor primária */
+    transform: translateY(-2px); /* Efeito de levitação sutil */
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  /* Ajuste para o ícone dentro do botão */
+  .material-symbols-outlined {
+    font-size: 1.25rem;
+  }
+}
